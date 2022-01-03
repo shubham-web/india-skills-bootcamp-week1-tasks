@@ -1,0 +1,230 @@
+/* body {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+} */
+body {
+	background: #f6f6f6;
+	margin: 0;
+	font-family: "Comfortaa", sans-serif;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	grid-template-rows: min-content;
+	height: 100vh;
+	backdrop-filter: blur(10px);
+}
+
+.centeredWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: rgba(255, 255, 200, 0.2) 0px 7px 29px 0px;
+	border-radius: 5px;
+	background: #262626;
+}
+
+.gameBoard .snakeHead,
+.gameBoard .snakeBody,
+.gameBoard .food {
+	box-sizing: border-box;
+	background-color: white;
+}
+.gameBoard .snakeBody {
+	background: url(https://img.freepik.com/free-photo/luxury-snake-skin-texture-use-background_34836-2427.jpg?size=626&ext=jpg);
+	background-size: 517%;
+	background-position: center;
+	border-radius: 18px;
+	border: 2px solid white;
+	box-shadow: 0 0 10px;
+}
+
+.gameBoard .snakeHead {
+	background: red;
+	border-radius: 0;
+	border-radius: 18px;
+	border: 2px solid white;
+	box-shadow: 0 0 5px;
+	z-index: 2;
+}
+.gameBoard .snakeHead.dirLeft {
+	border-top-left-radius: 0;
+}
+
+.gameBoard .food {
+	background: url(food.png);
+	border: none;
+	background-size: 100% 100%;
+}
+
+.gameWrapper {
+	width: min-content;
+	margin-top: 2rem;
+	display: grid;
+	grid-template-columns: 8fr 2fr;
+	grid-template-rows: 1fr 1fr auto;
+	grid-template-areas:
+		"header header"
+		"score score"
+		"gameBoard actions";
+	gap: 1rem;
+	justify-self: center;
+	perspective: 1000px;
+}
+.gameWrapper.initialView {
+	width: max-content;
+	grid-template-areas:
+		"header header"
+		"score score"
+		"actions actions";
+}
+.gameWrapper:not(.initialView) .levelSelector,
+.gameWrapper.initialView .leaderboard,
+.gameWrapper.initialView .gameBoard,
+.gameWrapper.initialView .scoreStuff,
+.gameWrapper:not(.initialView) .nameInput {
+	display: none;
+}
+.gameWrapper.initialView .nameInput input {
+	border: none;
+	background-color: transparent;
+	outline: none;
+	text-align: center;
+	font-size: 1rem;
+}
+.gameWrapper.initialView .actions {
+	background: transparent;
+}
+
+.gameWrapper header {
+	grid-area: header;
+	text-align: center;
+	color: black;
+	z-index: 10;
+}
+.gameWrapper header h1 {
+	margin: 0.5rem;
+	color: #000;
+}
+.gameBoard,
+.actions,
+.scoreBoard {
+	border-radius: 10px;
+	background-image: linear-gradient(145deg, #f0f0f0, #cacaca);
+	box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
+	border: 2px solid #26262610;
+	animation: fadeIn 1s forwards;
+	/* animation-delay: 1s; */
+	opacity: 0;
+}
+.gameWrapper .scoreBoard {
+	grid-area: score;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.3rem;
+	color: #262626;
+	z-index: 9;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.gameWrapper .gameBoard {
+	user-select: none;
+	padding: 1rem;
+	grid-area: gameBoard;
+	padding: 0;
+	/* animation: tada 3s forwards; */
+	/* transform-style: preserve-3d; */
+}
+@keyframes tada {
+	from {
+		opacity: 0;
+		transform: rotateY(180deg) rotateX(180deg) scale(0.6);
+	}
+	to {
+		opacity: 1;
+		transform: rotateY(0deg) rotateX(0deg) scale(1);
+	}
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.gameWrapper .actions {
+	grid-area: actions;
+	padding: 20px;
+	display: grid;
+	justify-content: center;
+	gap: 1rem;
+	align-items: start;
+	grid-template-rows: repeat(3, min-content);
+	background-image: url(homepage.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 0% 100%;
+}
+.gameWrapper .actions > button {
+	font-size: 1rem;
+	min-width: max-content;
+	border: none;
+	color: #262626;
+	padding: 0.7em 1.7em;
+	font-size: 18px;
+	border-radius: 0.5em;
+	background: #e8e8e8;
+	border: 1px solid #e8e8e8;
+	transition: all 0.3s;
+	box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+	cursor: pointer;
+	font-family: "Comfortaa", sans-serif;
+}
+
+.gameWrapper .actions > button:hover {
+	border: 1px solid white;
+	box-shadow: none;
+}
+
+.gameWrapper .actions > button:active {
+	box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+}
+hr {
+	width: 100%;
+	opacity: 0.5;
+}
+
+p {
+	margin: 0;
+}
+h4 {
+	margin: 0;
+}
+
+.gameBoard {
+	display: grid;
+	grid-template-columns: repeat(15, 1fr);
+	grid-template-rows: repeat(15, 1fr);
+	width: 60vmin;
+	height: 60vmin;
+	background: url(./ground.png);
+}
+.leaderboard h3 {
+	margin: 0;
+	text-align: center;
+	color: teal;
+	margin-bottom: 1rem;
+}
+
+.leaderboard p {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 6px;
+	border-bottom: 2px solid gray;
+}

@@ -1,0 +1,258 @@
+* {
+	font-family: "Montserrat", sans-serif;
+	box-sizing: border-box;
+}
+body {
+	background: url(bg.jpg) no-repeat;
+	background-size: cover;
+	margin: 0;
+}
+
+/* common styles */
+button {
+	padding: 10px 1rem;
+	font-size: 1.2rem;
+	border: none;
+	border-radius: 10px;
+	border: 5px solid #ffc107;
+	cursor: pointer;
+	width: 100%;
+	box-shadow: 0 0 20px rgb(0 0 0 / 30%);
+}
+
+.gameWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	perspective: 1500px;
+	animation: perspectiveChange 1s;
+}
+@keyframes perspectiveChange {
+	from {
+		perspective: 282px;
+	}
+	to {
+		perspective: 1500px;
+	}
+}
+
+/* cube css */
+.cube {
+	position: relative;
+	width: 60vmin;
+	height: 60vmin;
+	display: inline-block;
+	transform-style: preserve-3d;
+	transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	animation: rotateCube 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.cube[data-active="bottom"] {
+	transform: rotateX(90deg);
+}
+.cube[data-active="back"] {
+	transform: rotateX(180deg);
+}
+@keyframes rotateCube {
+	from {
+		transform: rotateX(45deg);
+	}
+	to {
+		transform: rotateX(360deg);
+	}
+}
+
+.cube .face {
+	width: 100%;
+	height: 100%;
+	opacity: 0.9;
+}
+
+.face.front {
+	background: #fa5252;
+}
+.face.back {
+	background: #f76707;
+}
+.face.right {
+	background: #12b886;
+}
+.face.left {
+	background: #4c6ef5;
+}
+.face.top {
+	background: #fab005;
+}
+.face.bottom {
+	background: #7950f2;
+}
+
+.cube .face:not(.front) {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.cube .face.left {
+	transform: rotateY(90deg) translateZ(-30vmin);
+}
+.cube .face.right {
+	transform: rotateY(-90deg) translateZ(-30vmin);
+}
+.cube .face.bottom {
+	transform: rotateX(270deg) translateZ(30vmin);
+}
+.cube .face.top {
+	transform: rotateX(-90deg) translateZ(-30vmin);
+}
+.cube .face.front {
+	transform: translateZ(30vmin);
+	border: 10px double white;
+}
+.cube .face.back {
+	transform: rotateX(180deg) translateZ(30vmin);
+}
+/* cube style ends */
+
+.homeScreen {
+	display: grid;
+	justify-content: center;
+	text-align: center;
+	color: white;
+	gap: 1rem;
+	padding-top: 2rem;
+}
+.homeScreen h1,
+.homeScreen h2 {
+	margin: 0;
+}
+.homeScreen h2 {
+	font-weight: normal;
+}
+
+.homeScreen img {
+	max-width: 200px;
+	margin: 0 auto;
+}
+
+/* game screen styles */
+.gameScreen {
+	display: grid;
+	grid-template-columns: 6.5fr 3.5fr;
+	height: 100%;
+}
+
+/*  game board styles */
+.gameScreen > div {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+
+.gameScreen > .gameInfo {
+	align-self: flex-start;
+	justify-items: center;
+	gap: 1rem;
+	padding: 1rem;
+	color: whitesmoke;
+}
+.gameScreen > .gameInfo > div {
+	width: 100%;
+}
+.score,
+.actions {
+	border-top: 2px solid white;
+}
+.actions {
+	padding-top: 2rem;
+}
+.gameScreen > .gameInfo .nextElementBoard {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	width: calc(40px * 3);
+	height: calc(40px * 4);
+}
+.gameScreen > .gameInfo .score {
+	text-align: center;
+}
+
+/* board styles */
+
+.board {
+	display: inline-grid;
+	background-image: url("grid-block.png");
+	background-color: #262626;
+	background-size: 40px;
+	background-repeat: repeat;
+
+	/* width and height will be dyanamically added based on game config */
+}
+
+/* blocks */
+/* .board > div {
+	border: 1px solid rgba(255, 255, 255, 0.2);
+} */
+.board > div:not(.invisible),
+.nextElementBoard > div:not(.invisible) {
+	transform: scale(0.9);
+	transform-origin: top left;
+	box-shadow: 1px 1px white, 2px 2px white, 3px 3px white, 4px 4px white;
+	border-radius: 10px;
+}
+.board > div:not(.invisible)::before,
+.board > div:not(.invisible)::after,
+.nextElementBoard > div:not(.invisible)::before,
+.nextElementBoard > div:not(.invisible)::after {
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 15%;
+	background: white;
+	border-radius: 20px;
+	opacity: 0.5;
+}
+.board > div:not(.invisible)::before,
+.nextElementBoard > div:not(.invisible)::before {
+	padding: 2px 8px;
+}
+.board > div:not(.invisible)::after,
+.nextElementBoard > div:not(.invisible)::after {
+	padding: 8px 2px;
+}
+.board > div.blue,
+.nextElementBoard > div.blue {
+	background-image: linear-gradient(to top right, lightblue, blue);
+}
+.board > div.teal,
+.nextElementBoard > div.teal {
+	background-image: linear-gradient(to top right, teal, teal);
+}
+.board > div.red,
+.nextElementBoard > div.red {
+	background-image: linear-gradient(to top right, white, red);
+}
+.board > div.orange,
+.nextElementBoard > div.orange {
+	background-image: linear-gradient(to top right, white, orange);
+}
+.board > div.peru,
+.nextElementBoard > div.peru {
+	background-image: linear-gradient(to top right, white, peru);
+}
+.board > div.green,
+.nextElementBoard > div.green {
+	background-image: linear-gradient(to top right, white, green);
+}
+.board > div.lightGreen,
+.nextElementBoard > div.lightGreen {
+	background-image: linear-gradient(to top right, white, #00bcd4);
+}
+
+.gameOverScreen {
+	color: whitesmoke;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	padding: 5rem;
+}

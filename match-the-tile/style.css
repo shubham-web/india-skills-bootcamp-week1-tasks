@@ -1,0 +1,185 @@
+@charset "utf-8";
+body {
+	background: #f6f6f6;
+	margin: 0;
+	font-family: "Comfortaa", sans-serif;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	grid-template-rows: min-content;
+	height: 100vh;
+	backdrop-filter: blur(10px);
+}
+
+.gameBoard {
+	width: min-content;
+	margin-top: 2rem;
+	display: grid;
+	grid-template-columns: 8fr 2fr;
+	grid-template-rows: 1fr 1fr auto;
+	grid-template-areas:
+		"header header"
+		"score score"
+		"tilegrid actions";
+	gap: 1rem;
+	justify-self: center;
+	perspective: 1000px;
+}
+
+.gameBoard header {
+	grid-area: header;
+	text-align: center;
+	color: black;
+	z-index: 10;
+}
+.gameBoard header h1 {
+	margin: 0.5rem;
+	color: #000;
+	text-transform: uppercase;
+}
+.gameBoard .tileGrid,
+.gameBoard .actions,
+.gameBoard .scoreBoard {
+	border-radius: 10px;
+	background: linear-gradient(145deg, #f0f0f0, #cacaca);
+	box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
+	border: 2px solid #26262610;
+	animation: fadeIn 3s forwards;
+	animation-delay: 1s;
+	opacity: 0;
+}
+.gameBoard .scoreBoard {
+	grid-area: score;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.3rem;
+	color: #262626;
+	z-index: 9;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.gameBoard .tileGrid {
+	user-select: none;
+	padding: 1rem;
+	grid-area: tilegrid;
+	animation: tada 3s forwards;
+	transform-style: preserve-3d;
+}
+@keyframes tada {
+	from {
+		opacity: 0;
+		transform: rotateY(180deg) rotateX(180deg) scale(0.6);
+	}
+	to {
+		opacity: 1;
+		transform: rotateY(0deg) rotateX(0deg) scale(1);
+	}
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+.gameBoard .tileGrid > div[data-going="RIGHT"] {
+	transform: translateX(110%);
+}
+.gameBoard .tileGrid > div[data-going="LEFT"] {
+	transform: translateX(-110%);
+}
+.gameBoard .tileGrid > div[data-going="UP"] {
+	transform: translateY(-110%);
+}
+.gameBoard .tileGrid > div[data-going="DOWN"] {
+	transform: translateY(110%);
+}
+
+.gameBoard .tileGrid > div {
+	cursor: grab;
+	border-radius: 5px;
+	transition: 0.3s;
+	/* animation: moveDown 1s; */
+}
+@keyframes moveDown {
+	from {
+		transform: translateY(-100%);
+	}
+	to {
+		transform: translateY(0%);
+	}
+}
+.gameBoard .tileGrid > div.active {
+	transform: scale(1.15);
+}
+.gameBoard .tileGrid > div.dissolve {
+	animation: dissolve 0.7s linear forwards;
+}
+@keyframes dissolve {
+	from {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+	to {
+		transform: scale(0);
+	}
+}
+.gameBoard .tileGrid > div.dissolve::before {
+	content: "✅";
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 10%;
+	top: 50%;
+	position: relative;
+}
+
+.gameBoard .actions {
+	grid-area: actions;
+	padding: 20px;
+	display: grid;
+	justify-content: center;
+	gap: 1rem;
+	align-items: start;
+	grid-template-rows: repeat(3, min-content);
+}
+.gameBoard .actions > button {
+	font-size: 1rem;
+	min-width: max-content;
+	border: none;
+	color: #262626;
+	padding: 0.7em 1.7em;
+	font-size: 18px;
+	border-radius: 0.5em;
+	background: #e8e8e8;
+	border: 1px solid #e8e8e8;
+	transition: all 0.3s;
+	box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+	cursor: pointer;
+	font-family: "Comfortaa", sans-serif;
+}
+
+.gameBoard .actions > button:hover {
+	border: 1px solid white;
+	box-shadow: none;
+}
+
+.gameBoard .actions > button:active {
+	box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff;
+}
+hr {
+	width: 100%;
+	opacity: 0.5;
+}
+
+p {
+	margin: 0;
+}
+h4 {
+	margin: 0;
+}

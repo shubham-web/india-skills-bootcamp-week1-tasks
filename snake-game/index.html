@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.css" />
+		<title>Snack Game - HTML Only</title>
+	</head>
+	<body>
+		<div class="gameWrapper initialView">
+			<header>
+				<h1>Let's get back to 90s :)</h1>
+			</header>
+			<div class="scoreBoard">
+				<span class="scoreStuff">
+					<span id="score">Score: 0</span>
+					•
+					<span id="highScore">Highscore: 0</span>
+				</span>
+				<div class="nameInput">
+					<input id="playerName" type="text" value="" placeholder="Type your name" />
+				</div>
+			</div>
+			<div class="gameBoard"></div>
+			<div class="actions">
+				<div class="levelSelector">
+					<input type="radio" name="level" id="easy" value="SLOW" checked />
+					<label for="easy"> Easy </label>
+					<br />
+					<label for="intermediate">
+						<input type="radio" name="level" id="intermediate" value="MEDIUM" />
+						Intermediate
+					</label>
+					<br />
+					<label for="hard">
+						<input type="radio" name="level" id="hard" value="FAST" />
+						Hard
+					</label>
+				</div>
+				<div class="leaderboard">
+					<h3>Top 5</h3>
+					<div class="playersList">
+						<p>
+							<span>1. Shubham</span>
+							<mark>23</mark>
+						</p>
+					</div>
+				</div>
+				<hr />
+				<button id="startButton">Start Game</button>
+				<!-- <hr /> -->
+			</div>
+		</div>
+		<script type="module" src="./scripts/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tetris</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="gameWrapper">
+			<div class="cube">
+				<div class="face front">
+					<div class="homeScreen">
+						<img src="tetris-blocks-3d.png" alt="" />
+						<h1>Tetris</h1>
+						<h2>Your Favorite Game With 3d Touch!</h2>
+						<button id="start">Start Game</button>
+						<button style="display: none" id="gameOver">Game over</button>
+					</div>
+				</div>
+				<div class="face back">
+					<div class="homeScreen">
+						<img src="tetris-blocks-3d.png" alt="" />
+						<h1>Game Over!</h1>
+						<h2>Score: <span class="scoreSpan">0</span></h2>
+						<button onclick="restartGame.click()">Restart Game</button>
+					</div>
+				</div>
+				<div class="face top"></div>
+				<div class="face bottom">
+					<div class="gameScreen">
+						<div class="boardWrapper">
+							<div class="board"></div>
+						</div>
+						<div class="gameInfo">
+							<div class="nextElement">
+								<p>Next Element</p>
+								<div class="nextElementBoard"></div>
+							</div>
+							<div class="score">
+								<p>Score</p>
+								<span class="scoreSpan">0</span>
+							</div>
+							<div class="actions">
+								<button id="pauseButton">Pause</button>
+								<br />
+								<br />
+								<button id="restartGame">Restart</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="face left"></div>
+				<div class="face right"></div>
+			</div>
+		</div>
+		<script type="module" src="main.js"></script>
+	</body>
+</html>

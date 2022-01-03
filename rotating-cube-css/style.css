@@ -1,0 +1,120 @@
+body{
+	background: #262626;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
+.cubes{
+	display: inline-block;
+	display: flex;
+	gap: 10rem;
+	perspective: 1800px;
+}
+
+.cubes .cube{
+	display: inline-block;
+	position: relative;
+	transform-style: preserve-3d;
+	transform-origin: center;
+}
+.cube[data-animation="left-to-right"]{
+	animation: left-to-right 8s linear infinite;
+}
+.cube[data-animation="top-to-bottom"]{
+	animation: top-to-bottom 8s linear infinite;
+}
+.cube[data-animation="random"]{
+	animation: random 8s linear infinite;
+}
+@keyframes left-to-right{
+	from{
+		transform: rotateY(0deg);
+	}
+	to{
+		transform: rotateY(360deg);
+	}
+}
+@keyframes top-to-bottom{
+	from{
+		transform: rotateX(0deg);
+	}
+	to{
+		transform: rotateX(360deg);
+	}
+}
+@keyframes random{
+	from{
+		transform: rotateX(0deg) rotateY(0deg);
+	}
+	to{
+		transform: rotateX(360deg)  rotateY(360deg);
+	}
+}
+.face{
+	width: 200px;
+	height: 200px;
+	display: grid;
+	gap: 4px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	opacity: .8;
+	background: #ffffff;
+	z-index: 1;
+}
+.face:not(.front){
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.face:before{
+	/*content: attr(data-face);*/
+}
+
+.face > div{
+	pointer-events: none;
+}
+.face.front > div{
+	background: #fa5252;
+}
+.face.back > div{
+	background: #f76707;
+}
+.face.right > div{
+	background: #12b886;
+}
+.face.left > div{
+	background: #4c6ef5;
+}
+.face.top > div{
+	background: #fab005;
+}
+.face.bottom > div{
+	background: #7950f2;
+}
+
+
+.face.front{
+	transform: translateZ(100px);
+}
+.face.back{
+	transform: translateZ(-100px);
+	/*transform-origin: top;*/
+}
+.face.top{
+	transform: rotateX(-90deg) translateZ(100px);
+	/*transform-origin: top;*/
+}
+.face.bottom{
+	/*transform-origin: bottom;*/
+	transform: rotateX(90deg) translateZ(100px);
+}
+.face.left{
+	transform: rotateY(90deg) translateZ(-100px);
+	/*transform-origin: left;*/
+}
+.face.right{
+	transform: rotateY(-90deg) translateZ(-100px);
+	/*transform-origin: right;*/
+}
