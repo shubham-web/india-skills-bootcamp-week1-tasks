@@ -48,12 +48,11 @@
 				node.className = "task";
 				node.removeAttribute("data-markup");
 				node.querySelector("h3").innerHTML = taskName;
-				node.querySelector("a").href = `./${folderName}`;
+				node.querySelector("a").href = `./${folderName}/`;
 				return node;
 			};
 			for (let task of tasks) {
 				let htmlNode = getListItemMarkup(task[0], task[1]);
-				console.log(htmlNode);
 				wrapper.appendChild(htmlNode);
 			}
 		</script>
