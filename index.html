@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Practice Task of Web Technologies Bootcamp for IndiaSkills Nationals 2021</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<header>
+			<h1>
+				Practice Tasks Given in the first week (Client side module) of <br />
+				Web Technologies Bootcamp for IndiaSkills Nationals 2021
+			</h1>
+		</header>
+		<main>
+			<section id="list">
+				<div data-markup="task">
+					<h3>Task Heading</h3>
+					<a href="./link-to-task">View</a>
+				</div>
+			</section>
+		</main>
+		<script>
+			// tasks[ [taskName, folderName] ]
+			const wrapper = document.querySelector("#list");
+			const markup = document.querySelector(`[data-markup="task"]`);
+			const tasks = [
+				["Tetris", "tetris"],
+				["Snake Game", "snake-game"],
+				["Match the Tile", "match-the-tile"],
+				["Rotating Cube with CSS", "rotating-cube-css"],
+				["Canvas Signature App", "canvas-signature-app"],
+				["Loading Animation", "loading-animation"],
+				["Draw Text with Lines on Canvas", "india-skills-text-as-lines"],
+				["Moving Packman", "moving-packman"],
+				["Quick PSD Designs", "photoshop"],
+			];
+
+			// DOM Parser
+			let dp = new DOMParser();
+			const getListItemMarkup = (taskName, folderName) => {
+				let node = markup.cloneNode(true);
+				node.className = "task";
+				node.removeAttribute("data-markup");
+				node.querySelector("h3").innerHTML = taskName;
+				node.querySelector("a").href = `./${folderName}`;
+				return node;
+			};
+			for (let task of tasks) {
+				let htmlNode = getListItemMarkup(task[0], task[1]);
+				console.log(htmlNode);
+				wrapper.appendChild(htmlNode);
+			}
+		</script>
+	</body>
+</html>

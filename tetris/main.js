@@ -51,7 +51,3 @@ pauseButton.addEventListener("click", () => {
 gameOver.addEventListener("click", () => {
 	cube.dataset.active = "back";
 });
-
-// cns
-this.nullTiles = [n, n, n];
-this.board = this.nullTiles;
