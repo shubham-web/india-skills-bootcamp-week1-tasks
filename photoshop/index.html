@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Photoshop Files</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="./../index.css" />
+	</head>
+	<body>
+		<header>
+			<h1>Photoshop Files</h1>
+		</header>
+		<main>
+			<section id="list">
+				<div data-markup="task">
+					<h3>Task Heading</h3>
+					<a href="./link-to-task">Download</a>
+				</div>
+			</section>
+		</main>
+		<script>
+			// files[ [title, path] ]
+			const wrapper = document.querySelector("#list");
+			const markup = document.querySelector(`[data-markup="task"]`);
+			const files = [
+				["Rhino Tech (Dummy IT Company)", "rhino-tech.psd"],
+				["Services", "services.psd"],
+				["Team", "team.psd"],
+				["Test", "test.psd"],
+			];
+
+			// DOM Parser
+			let dp = new DOMParser();
+			const getListItemMarkup = (title, path) => {
+				let node = markup.cloneNode(true);
+				node.className = "task";
+				node.removeAttribute("data-markup");
+				node.querySelector("h3").innerHTML = title;
+				node.querySelector("a").download = `${path}`;
+				node.querySelector("a").href = `./${path}`;
+				return node;
+			};
+			for (let task of files) {
+				let htmlNode = getListItemMarkup(task[0], task[1]);
+				wrapper.appendChild(htmlNode);
+			}
+		</script>
+	</body>
+</html>
